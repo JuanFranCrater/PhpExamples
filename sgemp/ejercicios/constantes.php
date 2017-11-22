@@ -62,6 +62,7 @@ print " <!DOCTYPE html>
     {   
         return "El area del cuadrado con lado ". $ladoEnt. " es ".(pow($ladoEnt,2));
     }
+
     function area_rectangulo()
     {
         $baseR=6;
