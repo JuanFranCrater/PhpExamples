@@ -7,6 +7,9 @@
 /**
 *En segundo lugar se definen las constantes
 */
+/*
+NO se puede redefinir una constante const
+*/
 define("TRIANGULO",1);
 define("CUADRADO",2);
 define("RECTANGULO",3);

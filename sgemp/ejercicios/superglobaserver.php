@@ -7,13 +7,13 @@ print " <!DOCTYPE html>
         <meta charset=\"utf-8\"/>
     </head>
     <body> ";
-   
-    print_r($_SERVER);
+    echo "<pre>".print_r($_SERVER,true)."</pre>";
    print "<hr/>";
-
+   echo "<pre>";
     var_dump($_SERVER);
     print "<hr/>";
     echo "El nombre del servidor es: ".$_SERVER['SERVER_NAME'];
+    echo "</pre>";
 print "
     </body>
 </html>
