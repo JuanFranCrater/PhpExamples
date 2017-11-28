@@ -9,7 +9,6 @@ function show_head($titulo){
         <body> ";
         print "<h1>$titulo</h1>"; 
 }
-
 function show_footer()
 {
         
