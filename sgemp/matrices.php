@@ -57,7 +57,20 @@ $arraySorpresa = array(
     "d"
 );
 //d tiene la key 7
+$arraySorpresa[]=array();
+$arraySorpresa[]=array(1,2,3);
 echo "<p>".print_r($arraySorpresa,true)."</p>";
+echo "<h1>foreach</h1>";
+echo "<p>Número de elementos del array es:".count($arraySorpresa)."</p>";
+echo "<p>Se debe usar foreach para recorrer los array asociativos</p>";
+$i=0;
+foreach($arraySorpresa as $elemento){
+    if(!is_array($elemento))
+    echo "<p>Posicion: ".$i." contiene: ".$elemento."</p>";
+    else
+    echo "<p>Posicion: ".$i." contiene: ".print_r($elemento.true)."</p>";
+    $i++;
+}
    print "
     </body>
 </html>
