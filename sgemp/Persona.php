@@ -3,7 +3,7 @@
         public $nombre;
         private $apellido;
         private $edad;
-    
+        
         public function saludar()
         {
             return "Hola soy ". $this->nombre." ".$this->apellido." y tengo ".$this->edad." años";

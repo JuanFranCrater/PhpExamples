@@ -4,8 +4,9 @@ class Estudiante extends Persona
 {
    private $codigo;
    private $matricula;
+   public static $numModulo=4;  
 
-    function __construct($nombre,$apellido,$edad,$codigo,$matricula)
+   function __construct($nombre,$apellido,$edad,$codigo,$matricula)
     {
         parent::__construct($nombre,$apellido,$edad);
         print"Constructor de Estudiante";

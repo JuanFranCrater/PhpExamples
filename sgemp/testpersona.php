@@ -28,6 +28,8 @@ $personas[1]=$estudiante;
                 echo "<p>Apellido: ".$personas[$i]->getApellido()."</p>";
                 echo "<p>Edad: ".$personas[$i]->getEdad()."</p>";
                 echo "<p>Codigo: ".$personas[$i]->getCodigo()."</p>";
+                echo "<p>Numero de Modulos Matriculados: ".Estudiante::$numModulo."</p>";
+                //El uso de metodos y propiedades estaticas mediante el nombre de la clase
                 echo "<p>Modulos Matriculados: ".print_r($personas[$i]->getMatricula(),true)."</p>";
                
             }else{
