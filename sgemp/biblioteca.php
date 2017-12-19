@@ -13,8 +13,7 @@ function show_head($titulo){
         <script src=\"http://code.jquery.com/jquery.js\"></script>
         
         <script src=\"js/bootstrap.min.js\"></script>
-        ";
-        print "<h1>$titulo</h1>"; 
+        "; 
         
 }
 function show_footer()
