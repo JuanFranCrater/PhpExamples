@@ -5,6 +5,7 @@ define ("MYSQL_USER","www-data");
 define ("MYSQL_PASSWORD","www-data");
 
 define ("TABLE_USER","user");
+define ("TABLE_PRODUCTOS","Productos");
 define ("COLUMN_USER_NAME","name");
 define ("COLUMN_USER_PASSWORD","password");
 class Dao{
@@ -28,7 +29,12 @@ class Dao{
             $this->conn=null;
         }
     }
-
+    function getProducts()
+    {   
+        $sql="Select * from ".TABLE_PRODUCTOS;
+        $statement=$this->conn->query($sql);
+        return $statement;
+    }
     function validateUser($user,$password)
     {
         try{
