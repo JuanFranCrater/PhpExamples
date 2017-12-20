@@ -1,7 +1,7 @@
 <?php
-    include_once '../dao.php';
-    include_once '../biblioteca.php';
-    show_head("Inicio de sesión");
+    include_once '../app.php';
+    session_start();
+   App:: show_head("Inicio de sesión");
 ?>
     
     <div class="container">
@@ -39,13 +39,14 @@
             echo "<p>Debe introuducir una contraseña</p>";
         }else{
             //Realizamos la conexión a la base de datos, y se comprueba si el usuario existe.
-            $dao= new Dao();
+            $app= new App();
             
-            if(!$dao->isConnected())
+            if(!$app->getDao()->isConnected())
             {
-                echo "<p>".$dao->error."</p>";
-            }elseif($dao->validateUser($user,$password)){
+                echo "<p>".$app->error."</p>";
+            }elseif($app->getDao()->validateUser($user,$password)){
                 //guardaremos la sesion de usuario 
+                $app->init_session($user);
                 //redireccionamos a otra pagina
                 echo "<script language=\"javascript\">window.location.href=\"inventory.php\"</script>";
             }else{
@@ -53,5 +54,5 @@
             }
         }
     }
-    show_footer();
+   App::show_footer();
 ?>
