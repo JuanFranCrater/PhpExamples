@@ -13,24 +13,25 @@ App::show_head("Inventario Producto");
     <tr>
       <th>ID</th>
       <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Precio</th>
+      <th>Nombre Corto</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     
    
     <?php
-    $statement=$app->getDao()->getProducts();
+    $statement=$app->getDao()->getDependency();
     if($statement->rowCount()>0)
     {
-       while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+       while($row = $statement->fetch()) {
         echo '   
         <tr>
         <td>'. $row["ID"].'</td>
         <td>'.$row["name"].'</td>
-        <td>'.$row["description"].'</td>
-        <td>'.$row["price"].'</td>
+        <td>'.$row["Shortname"].'</td>
+        <td>'.$row["Description"].'</td>
+        
       </tr>
       ';
        }
@@ -41,7 +42,9 @@ App::show_head("Inventario Producto");
     
   </tbody>
 </table>
-<input type="button" value="Log Out" class="button" onClick="Location: logout.php"  />
+<form action="logout.php">
+<input type="submit" value="Log Out" class="btn btn-primary"/>
+</form>
 </div>
 
 <?php

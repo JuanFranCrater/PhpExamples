@@ -1,5 +1,7 @@
 <?php
+
 include_once 'dao.php';
+
 class App{
     protected $dao;
 
@@ -80,6 +82,14 @@ class App{
             
     }
     
+    /**
+     * Función que obtiene todas las dependencias de la base de datos
+     */
+    function getDependency()
+    {
+       return $this->dao->getDependency();
+    }
+
     function show_footer()
     {     
     print "

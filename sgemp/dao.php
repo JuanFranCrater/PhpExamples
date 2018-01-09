@@ -6,8 +6,14 @@ define ("MYSQL_PASSWORD","www-data");
 
 define ("TABLE_USER","user");
 define ("TABLE_PRODUCTOS","Productos");
+define ("TABLE_DEPENDENCIAS","Dependency");
 define ("COLUMN_USER_NAME","name");
 define ("COLUMN_USER_PASSWORD","password");
+define ("COLUMN_DEPENDENCY_NAME","name");
+define ("COLUMN_DEPENDENCY_SHORTNAME","shortname");
+define ("COLUMN_DEPENDENCY_ID","ID");
+define ("COLUMN_DEPENDENCY_DESCRIPTION","description");
+
 class Dao{
 
     protected $conn;
@@ -30,10 +36,27 @@ class Dao{
         }
     }
     function getProducts()
-    {   
+    {   try{
         $sql="Select * from ".TABLE_PRODUCTOS;
         $statement=$this->conn->query($sql);
         return $statement;
+    }catch(PDOException $e)
+    {
+        $this->error="Error al consultar la tabla ".TABLE_PRODUCTOS;
+
+    }
+    }
+    function getDependency()
+    {   
+        try{
+            $sql="Select * from ".TABLE_DEPENDENCIAS;
+            $statement=$this->conn->query($sql);
+            return $statement;
+        }catch(PDOException $e)
+        {
+            $this->error="Error al consultar la tabla ".TABLE_DEPENDENCIAS;
+
+        }
     }
     function validateUser($user,$password)
     {
