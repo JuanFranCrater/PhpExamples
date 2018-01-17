@@ -48,7 +48,7 @@
                 //guardaremos la sesion de usuario 
                 $app->init_session($user);
                 //redireccionamos a otra pagina
-                echo "<script language=\"javascript\">window.location.href=\"inventory.php\"</script>";
+                echo "<script language=\"javascript\">window.location.href=\"inicio.php\"</script>";
             }else{
                 echo "<p>Usuario incorrecto</p>";
             }
