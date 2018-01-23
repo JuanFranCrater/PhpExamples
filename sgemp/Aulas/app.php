@@ -91,34 +91,7 @@ class App{
         <input type="submit" value="Log Out" class="btn btn-primary"/>
         </form>';
     }
-    function show_login()
-    {
-        echo'
-        <div class="container">
-        <div class="row align-items-center">
-           <div class="col-12 col-md-4 offset-md-4 offset-col-3">
-           <h2 class="form-signin-heading text-center">Inicie sesion</h2>
-               <form method="POST" action="<?= $_SERVER[\'PHP_SELF\'];?>" class="form-signin">
-                <div class="form-group">
-                   <label for="inputUser" class="col-form-label">Usuario</label>
-                   <input type="text" name="user" class="form-control"  id="inputUser" value="" autofocus="autofocus" required="required"/>
-                </div>
-                <div class="form-group">
-                   <label for="inputPassword" class="col-form-label">Contraseña</label>
-                   <input type="password" name="password" class="form-control" id="inputPassword" value="" required="required"/>
-                </div>
-                <div class="text-center">
-                <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
-                <form action="registro.php">
-                <input type="submit" value="Registrarse" class="btn btn-primary pull-right"/>
-                </form>
-                </div>
-               </form>
-           </div><!-- Col-->
-        </div><!-- Row-->
-       </div><!-- Container-->
-       ';
-    }
+   
 
     function menu()
     {
