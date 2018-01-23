@@ -1,0 +1,171 @@
+<?php
+
+include_once 'daoAula.php';
+
+class App{
+    protected $dao;
+
+    function __construct()
+    {
+        $this->dao=new Dao();
+    }
+    function getDao()
+    {
+        return $this->dao;
+    }
+
+    /**
+     * Función que guarda el nombre de usuario en la variable $SESSION
+     * cuando el usuario se ha logueado (login.php)
+     */
+    function init_session($user)
+    {
+        if(!isset($_SESSION['user']))
+        {
+            $_SESSION['user']=$user;
+        }
+    }
+    /**
+     * Función que elimina una sesion previamente creada
+     */
+    function invalidate_session()
+    {
+        if(isset($_SESSION['user']))
+        {
+            unset ($_SESSION['user']);
+
+        }
+        session_destroy();
+        $this->showLogin();
+    }
+    /**
+     * Función que comprueba si se esta logeado
+     */
+    function validateSession()
+    {
+        session_start();
+        if(!$this->isLogged())
+        {
+            $this->showLogin();
+        }
+    }
+
+    /**
+     * Funcion que comprueba si el usuario ha inicializado sesión
+     */
+    function isLogged()
+    {
+        return isset($_SESSION['user']);
+    }
+    /**
+     * Funcion que redirige a Login
+     */
+    function showLogin()
+    {
+        header('Location: login.php');
+    } 
+    function show_head($titulo){
+        print " <!DOCTYPE html>
+        <html lang=\"es\">
+            <head>
+                <meta charset=\"utf-8\"/>
+                <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                <title>".$titulo."</title>
+                <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\">
+                <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+                <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js\"></script>
+                <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js\"></script>
+            </head>
+            <body>
+            "; 
+            
+    }
+    
+    /**
+     * Función que obtiene todas las dependencias de la base de datos
+     */
+    function log_out()
+    {
+        echo '<form action="logout.php">
+        <input type="submit" value="Log Out" class="btn btn-primary"/>
+        </form>';
+    }
+    function show_login()
+    {
+        echo'
+        <div class="container">
+        <div class="row align-items-center">
+           <div class="col-12 col-md-4 offset-md-4 offset-col-3">
+           <h2 class="form-signin-heading text-center">Inicie sesion</h2>
+               <form method="POST" action="<?= $_SERVER[\'PHP_SELF\'];?>" class="form-signin">
+                <div class="form-group">
+                   <label for="inputUser" class="col-form-label">Usuario</label>
+                   <input type="text" name="user" class="form-control"  id="inputUser" value="" autofocus="autofocus" required="required"/>
+                </div>
+                <div class="form-group">
+                   <label for="inputPassword" class="col-form-label">Contraseña</label>
+                   <input type="password" name="password" class="form-control" id="inputPassword" value="" required="required"/>
+                </div>
+                <div class="text-center">
+                <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+                <form action="registro.php">
+                <input type="submit" value="Registrarse" class="btn btn-primary pull-right"/>
+                </form>
+                </div>
+               </form>
+           </div><!-- Col-->
+        </div><!-- Row-->
+       </div><!-- Container-->
+       ';
+    }
+
+    function menu()
+    {
+        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="inicio.php">Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Dependencias
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="dependency.php">Listar</a>
+            <a class="dropdown-item" href="addDependency.php">Añadir</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Sectores
+        </a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="sector.php">Listar</a>
+        <a class="dropdown-item" href="addSector.php">Añadir</a>
+        </div>
+      </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <form action="logout.php">
+          <input type="submit" value="Log Out" class="btn btn-primary pull-right"/>
+          </form>
+          
+          </ul>
+        </div>
+      </nav>';
+    }
+    function show_footer()
+    {     
+    print "
+    </body>
+    </html>
+    ";
+    }
+}
+    
+
+?>

@@ -4,7 +4,7 @@ $app = new App();
 
     $app->validateSession();
 
-App::show_head("Añadir Dependencia");
+App::show_head("Añadir Sector");
 App::menu();
 ?>
 <div class="container">
@@ -22,7 +22,9 @@ App::menu();
     <label for="description">Description:</label>
     <textarea class="form-control" maxlength="250" placeholder="Introduce una description" name="description" id="description" rows="3"></textarea>
     </div>
-    //Falta añadir idDependency
+    <div class="form-group">
+
+    </div>
     <button type="submit" class="btn btn-primary">Añadir</button>
   </form>
 </div>

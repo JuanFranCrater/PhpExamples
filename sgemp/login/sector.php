@@ -7,7 +7,7 @@ App::show_head("Sectors");
 App::menu();
 
 echo '<div class="container">';
-echo '<h1 class=\"text-center\"> Listado de sectores por dependencia </h1>';
+echo '<h1 class=\"text-center\"> Listado de sectores </h1>';
 if (!isset($_GET['idDependency'])) {
     $resulset = $app->getDao()->getSectors();
     
@@ -44,7 +44,7 @@ else {
                     echo "<td> " .$item['shortname']. "</td>";
                     echo "<td> " .$item['description']. "";
                     echo '<td>
-                    <a href="deleteSec.php?idSector='.$row["ID"].'">
+                    <a href="deleteSec.php?idSector='.$item["ID"].'">
                     <img border="0" alt="" src="delete.png" width="30" height="30">
                     </a></td>
                     ';
