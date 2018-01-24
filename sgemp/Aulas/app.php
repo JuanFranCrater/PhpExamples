@@ -96,7 +96,7 @@ class App{
     function menu()
     {
         echo '<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="inicio.php">Inicio</a>
+        <a class="navbar-brand" href="Inicio.php">Inicio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -105,20 +105,18 @@ class App{
           <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Dependencias
+            Aulas
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="dependency.php">Listar</a>
-            <a class="dropdown-item" href="addDependency.php">Añadir</a>
+            <a class="dropdown-item" href="aulas.php">Buscar Aula</a>
           </div>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Sectores
+          Reservas
         </a>
         <div class="dropdown-menu">
-        <a class="dropdown-item" href="sector.php">Listar</a>
-        <a class="dropdown-item" href="addSector.php">Añadir</a>
+        <a class="dropdown-item" href="reservas.php">Listar reservas del usuario</a>
         </div>
       </li>
           </ul>

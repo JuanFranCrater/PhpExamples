@@ -6,8 +6,14 @@ define ("MYSQL_PASSWORD","www-data");
 
 define ("TABLE_USER","Users");
 define ("TABLE_AULAS","Aula");
+define("TABLE_TRAMOS","HORARIOS");
+define ("COLUMN_AULAS_SHORTNAME","ID");
+define ("COLUMN_TRAMOS_TRAMO","Tramo");
+define ("COLUMN_TRAMOS_ID","ID");
 define ("TABLE_RESERVAS","Reservas");
+define ("COLUMN_RESERVAS_IDUSUARIO","IDUsuario");
 define ("COLUMN_USER_ID","ID");
+define ("COLUMN_AULAS_ID","ID");
 define ("COLUMN_USER_USERNAME","Username");
 define ("COLUMN_USER_PASSWORD","Password");
 define ("COLUMN_USER_NAME","Name");
@@ -54,7 +60,74 @@ class Dao{
             echo "Error en la conexion: ".$e->getMessage();
         }
     }
-function addUser($username,$password,$name,$surname,$birthdate,$email)
+    function getReservasByUsuario($username)
+    {
+        try{
+           $id=$this->getIdUsuarioByUsername($username);
+            $id=9;
+            $sql="Select * from ".TABLE_RESERVAS." where ".COLUMN_RESERVAS_IDUSUARIO." = :id";
+
+            $statement=$this->conn->prepare($sql);
+
+            $statement->bindParam(':id',$id, PDO::PARAM_INT);
+
+            $statement->execute();
+
+            return $statement;
+        }catch(PDOException $e)
+        {
+            $this->error="Error al consultar la tabla ".TABLE_SECTORES;
+        }
+    }
+    function getIdUsuarioByUsername($username)
+    {
+        try{
+            $sql="SELECT ".COLUMN_USER_ID." FROM ".TABLE_AULAS." WHERE ".COLUMN_USER_USERNAME."='".$username."'";
+            $statement=$this->conn->query($sql);
+            print_r($statement);
+            return $id['ID'];
+            
+        }catch(PDOException $e){
+            echo "Error en la conexion: ".$e->getMessage();
+        }
+    }
+    //Terminar los getName
+    function getNameAulaById($id)
+    {
+        try{
+            $sql="SELECT ".COLUMN_AULAS_SHORTNAME." FROM ".TABLE_AULAS." WHERE ".COLUMN_AULAS_ID."='".$id."'";
+            $statement=$this->conn->query($sql);
+            $name=$statement->fetch();
+            return $name['Name'];
+    }catch(PDOException $e){
+        echo "Error en la conexion: ".$e->getMessage();
+    }
+    }
+    function getNameUserById($id)
+    {
+        try{
+            $sql="SELECT ".COLUMN_USER_USERNAME." FROM ".TABLE_USER." WHERE ".COLUMN_USER_ID."='".$id."'";
+            $statement=$this->conn->query($sql);
+            $name=$statement->fetch();
+        return $name['Username'];
+    }catch(PDOException $e){
+        echo "Error en la conexion: ".$e->getMessage();
+    }
+    }
+    function getTramoById($id)
+    {
+        try{
+            $sql="SELECT ".COLUMN_TRAMOS_TRAMO." FROM ".TABLE_TRAMOS." WHERE ".COLUMN_TRAMOS_ID."='".$id."'";
+            $statement=$this->conn->query($sql);
+            $name=$statement->fetch();
+        return $name['Tramo'];
+    }catch(PDOException $e){
+        echo "Error en la conexion: ".$e->getMessage();
+    }
+    }
+    
+
+    function addUser($username,$password,$name,$surname,$birthdate,$email)
     {
         try{
             if($this->validateUser($username,$password))
