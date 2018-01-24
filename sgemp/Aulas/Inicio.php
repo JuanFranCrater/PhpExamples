@@ -36,7 +36,10 @@ else
                 echo "<td> " .$item['IDTramo']. "</td>";
                 echo "<td> " .$item['Dia']. "</td>";
                 echo "<td> " .$item['IDUsuario']. "";
-                echo '<td></td>
+                echo '<td>
+                <button class="btn btn-outline-secondary" onclick="confirmDialog(\'cancelarReserva.php?idUsuario='.$row["IDUsuario"].'&idAula='.$row["IDAula"].'&idTramo='.$row['IDTramo'].'&Dia='.$row['Dia'].'\')"> 
+                <img src="img/cancelReserva.png" width="30" height="30"/> 
+                </button> </td>
                 ';
             }
             echo "</table>";
@@ -47,5 +50,6 @@ else
     }
 }
 echo '</div>';
+App::create_dialog();
 App::show_footer();
 ?>

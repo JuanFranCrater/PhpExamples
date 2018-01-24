@@ -129,6 +129,21 @@ class App{
         </div>
       </nav>';
     }
+    function create_dialog($message,$true,$false)
+    {
+        echo '<script> 
+        function confirmDialog() { 
+        ar txt; 
+        var r = confirm("'.$message.'"); 
+        if (r == true) { 
+         '.$true.' 
+        } else { 
+        '.$false.' 
+         } 
+        } 
+</script>
+        ';
+    }
     function show_footer()
     {     
     print "

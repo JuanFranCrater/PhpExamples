@@ -5,21 +5,27 @@ define ("MYSQL_USER","www-data");
 define ("MYSQL_PASSWORD","www-data");
 
 define ("TABLE_USER","Users");
-define ("TABLE_AULAS","Aula");
-define("TABLE_TRAMOS","HORARIOS");
-define ("COLUMN_AULAS_SHORTNAME","ID");
-define ("COLUMN_TRAMOS_TRAMO","Tramo");
-define ("COLUMN_TRAMOS_ID","ID");
-define ("TABLE_RESERVAS","Reservas");
-define ("COLUMN_RESERVAS_IDUSUARIO","IDUsuario");
 define ("COLUMN_USER_ID","ID");
-define ("COLUMN_AULAS_ID","ID");
 define ("COLUMN_USER_USERNAME","Username");
 define ("COLUMN_USER_PASSWORD","Password");
 define ("COLUMN_USER_NAME","Name");
 define ("COLUMN_USER_SURNAME","Surname");
 define ("COLUMN_USER_BIRTHDATE","BirthDate");
 define ("COLUMN_USER_EMAIL","Email");
+
+define ("TABLE_AULAS","Aula");
+define ("COLUMN_AULAS_SHORTNAME","Shortname");
+define ("COLUMN_AULAS_ID","ID");
+
+define("TABLE_TRAMOS","HORARIOS");
+define ("COLUMN_TRAMOS_TRAMO","Tramo");
+define ("COLUMN_TRAMOS_ID","ID");
+
+define ("TABLE_RESERVAS","Reservas");
+define ("COLUMN_RESERVAS_IDUSUARIO","IDUsuario");
+define ("COLUMN_RESERVAS_IDAULA","IDAula");
+define ("COLUMN_RESERVAS_IDTRAMO","IDTramo");
+define ("COLUMN_RESERVAS_DIA","Dia");
 
 
 class Dao{
@@ -152,7 +158,18 @@ class Dao{
         return false;
         }
     }
-      
+    function cancelarReserva($idUsuario,$idAula,$idTramo,$Dia)
+    {
+        try { 
+            $sql="DELETE FROM ".TABLE_RESERVAS." WHERE ".COLUMN_RESERVAS_IDUSUARIO."='".$idUsuario."' and ". 
+            COLUMN_RESERVAS_IDAULA."='".$idAula."' and ".COLUMN_RESERVAS_IDTRAMO."='".$idTramo."' and ". 
+            COLUMN_RESERVAS_DIA."='".$Dia."'"; 
+            $this->conn->exec($sql); 
+            } catch(PDOException $e){ 
+                $this->error= "Error: ".$e->getMessage();
+                echo $this->error;
+             } 
+    }
     function _destruct()
     {
         if($this->isConnected())
