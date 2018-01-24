@@ -29,6 +29,7 @@
       </div><!-- Col-->
    </div><!-- Row-->
   </div><!-- Container-->
+  
    <?php
        if($_SERVER['REQUEST_METHOD']=="POST")
        {
@@ -53,7 +54,7 @@
                    //guardaremos la sesion de usuario 
                    $app->init_session($user);
                    //redireccionamos a otra pagina
-                   echo "<script language=\"javascript\">window.location.href=\"inicio.php\"</script>";
+                   echo "<script language=\"javascript\">window.location.href=\"Inicio.php\"</script>";
                }else{
                    echo "<p>Usuario incorrecto</p>";
                }
