@@ -12,7 +12,7 @@ echo '<h2 class=\"text-center\">Bienvenido, '.$username.'</h2>';
 <?php
 $resulset = $app->getDao()->getReservasByUsuario($username);
 $reservas = $resulset->fetchAll();
-
+    
 if (!$resulset) {
     echo '<p>Error en la base de datos</p>';
 }
@@ -32,12 +32,12 @@ else
             echo "<thead class=\"thead-default\"> <tr> <th> Aula </th> <th> Horario </th> <th> Dia </th> <th> Nombre Usuario </th><th> Cancelar Reserva </th> </tr> </thead>";
             
             foreach ($reservas as $item) {
-                echo "<tr> <td> " .$item['IDAula']. "</td>";
-                echo "<td> " .$item['IDTramo']. "</td>";
+                echo "<tr> <td> " .$app->getDao()->getNameAulaById($item['IDAula']). "</td>";
+                echo "<td> " .$app->getDao()->getTramoById($item['IDTramo']). "</td>";
                 echo "<td> " .$item['Dia']. "</td>";
-                echo "<td> " .$item['IDUsuario']. "";
+                echo "<td> " .$username. "";
                 echo '<td>
-                <button class="btn btn-outline-secondary" onclick="confirmDialog(\'cancelarReserva.php?idUsuario='.$row["IDUsuario"].'&idAula='.$row["IDAula"].'&idTramo='.$row['IDTramo'].'&Dia='.$row['Dia'].'\')"> 
+                <button class="btn btn-outline-secondary" onclick="confirmDialog(\'cancelarReserva.php?idUsuario='.$item["IDUsuario"].'&idAula='.$item["IDAula"].'&idTramo='.$item['IDTramo'].'&Dia='.$item['Dia'].'\')"> 
                 <img src="img/cancelReserva.png" width="30" height="30"/> 
                 </button> </td>
                 ';

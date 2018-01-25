@@ -129,7 +129,7 @@ class App{
         </div>
       </nav>';
     }
-    function create_dialog($message,$true,$false)
+    function create_confirm_Dialog($message,$true,$false)
     {
         echo '<script> 
         function confirmDialog() { 
@@ -143,6 +143,10 @@ class App{
         } 
 </script>
         ';
+    }
+    function create_dialog()
+    {
+       
     }
     function show_footer()
     {     

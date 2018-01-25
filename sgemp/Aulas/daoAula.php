@@ -17,7 +17,7 @@ define ("TABLE_AULAS","Aula");
 define ("COLUMN_AULAS_SHORTNAME","Shortname");
 define ("COLUMN_AULAS_ID","ID");
 
-define("TABLE_TRAMOS","HORARIOS");
+define("TABLE_TRAMOS","Horarios");
 define ("COLUMN_TRAMOS_TRAMO","Tramo");
 define ("COLUMN_TRAMOS_ID","ID");
 
@@ -66,6 +66,7 @@ class Dao{
             echo "Error en la conexion: ".$e->getMessage();
         }
     }
+
     function getReservasByUsuario($username)
     {
         try{
@@ -85,18 +86,19 @@ class Dao{
             $this->error="Error al consultar la tabla ".TABLE_SECTORES;
         }
     }
+
     function getIdUsuarioByUsername($username)
     {
         try{
             $sql="SELECT ".COLUMN_USER_ID." FROM ".TABLE_AULAS." WHERE ".COLUMN_USER_USERNAME."='".$username."'";
-            $statement=$this->conn->query($sql);
-            print_r($statement);
+            $id=$this->conn->query($sql);
             return $id['ID'];
             
         }catch(PDOException $e){
             echo "Error en la conexion: ".$e->getMessage();
         }
     }
+
     //Terminar los getName
     function getNameAulaById($id)
     {
@@ -104,15 +106,18 @@ class Dao{
             $sql="SELECT ".COLUMN_AULAS_SHORTNAME." FROM ".TABLE_AULAS." WHERE ".COLUMN_AULAS_ID."='".$id."'";
             $statement=$this->conn->query($sql);
             $name=$statement->fetch();
-            return $name['Name'];
+            
+            return $name['Shortname'];
     }catch(PDOException $e){
         echo "Error en la conexion: ".$e->getMessage();
     }
     }
+
     function getNameUserById($id)
     {
         try{
             $sql="SELECT ".COLUMN_USER_USERNAME." FROM ".TABLE_USER." WHERE ".COLUMN_USER_ID."='".$id."'";
+            
             $statement=$this->conn->query($sql);
             $name=$statement->fetch();
         return $name['Username'];
@@ -120,11 +125,13 @@ class Dao{
         echo "Error en la conexion: ".$e->getMessage();
     }
     }
+
     function getTramoById($id)
     {
         try{
             $sql="SELECT ".COLUMN_TRAMOS_TRAMO." FROM ".TABLE_TRAMOS." WHERE ".COLUMN_TRAMOS_ID."='".$id."'";
             $statement=$this->conn->query($sql);
+            echo $sql;
             $name=$statement->fetch();
         return $name['Tramo'];
     }catch(PDOException $e){
@@ -132,7 +139,6 @@ class Dao{
     }
     }
     
-
     function addUser($username,$password,$name,$surname,$birthdate,$email)
     {
         try{
@@ -158,6 +164,7 @@ class Dao{
         return false;
         }
     }
+
     function cancelarReserva($idUsuario,$idAula,$idTramo,$Dia)
     {
         try { 
@@ -170,6 +177,7 @@ class Dao{
                 echo $this->error;
              } 
     }
+
     function _destruct()
     {
         if($this->isConnected())
@@ -179,4 +187,5 @@ class Dao{
         }
     }
 }
+
 ?>
