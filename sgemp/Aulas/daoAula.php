@@ -131,7 +131,6 @@ class Dao{
         try{
             $sql="SELECT ".COLUMN_TRAMOS_TRAMO." FROM ".TABLE_TRAMOS." WHERE ".COLUMN_TRAMOS_ID."='".$id."'";
             $statement=$this->conn->query($sql);
-            echo $sql;
             $name=$statement->fetch();
         return $name['Tramo'];
     }catch(PDOException $e){

@@ -4,7 +4,13 @@ $app = new App();
 
     $app->validateSession();
 $username=$_SESSION['user'];
-App::show_head("Reservas");
+App::show_head("Reservas");echo "
+
+<script language=\"JavaScript\" type=\"text/javascript\">
+function checkDelete(){
+    return confirm('Are you sure?');
+}
+</script>";
 App::menu();
 echo '<div class="container">';
 echo '<h2 class=\"text-center\">Bienvenido, '.$username.'</h2>';
@@ -37,10 +43,9 @@ else
                 echo "<td> " .$item['Dia']. "</td>";
                 echo "<td> " .$username. "";
                 echo '<td>
-                <button class="btn btn-outline-secondary" onclick="confirmDialog(\'cancelarReserva.php?idUsuario='.$item["IDUsuario"].'&idAula='.$item["IDAula"].'&idTramo='.$item['IDTramo'].'&Dia='.$item['Dia'].'\')"> 
+                <a class="btn btn-outline-secondary" href="deletelink" onclick="checkDelete('.$item["IDUsuario"].', '.$item["IDAula"].', '.$item['IDTramo'].', '.$item['Dia'].'.)">Delete</a>
                 <img src="img/cancelReserva.png" width="30" height="30"/> 
-                </button> </td>
-                ';
+                </button> </td>';
             }
             echo "</table>";
         }
@@ -50,6 +55,5 @@ else
     }
 }
 echo '</div>';
-App::create_dialog();
 App::show_footer();
 ?>
