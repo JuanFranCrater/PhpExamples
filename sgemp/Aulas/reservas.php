@@ -3,22 +3,12 @@ include_once 'app.php';
 $app = new App();
 
     $app->validateSession();
-$username=$_SESSION['user'];
-App::show_head("Reservas");echo "
-
-<script language=\"JavaScript\" type=\"text/javascript\">
-function confirmationDelete()
-{
-   var conf = confirm('¿Desea cancelar esta reserva?');
-
-}
-</script>";
+App::show_head("Reservas");
 App::menu();
 echo '<div class="container">';
-echo '<h2 class=\"text-center\">Bienvenido, '.$username.'</h2>';
 ?>
 <?php
-$resulset = $app->getDao()->getReservasByUsuario($username);
+$resulset = $app->getDao()->getReservas();
 $reservas = $resulset->fetchAll();
     
 if (!$resulset) {
@@ -28,7 +18,7 @@ else
 {
     // No hay sectores en la dependencia
     if (count($reservas) == 0) {
-        echo '<p> No ha reservado ningun aula</p>';
+        echo '<p> No hay reservada ningun aula</p>';
     }
     else {
     // Hay datos que mostrar
@@ -37,15 +27,14 @@ else
         
             <table class=\"table table-bordered table-striped\">";
             
-            echo "<thead class=\"thead-default\"> <tr> <th> Aula </th> <th> Horario </th> <th> Dia </th> <th> Nombre Usuario </th><th> Cancelar Reserva </th> </tr> </thead>";
+            echo "<thead class=\"thead-default\"> <tr> <th> Aula </th> <th> Horario </th> <th> Dia </th> <th> Nombre Usuario </th></tr> </thead>";
             
             foreach ($reservas as $item) {
                 echo "<tr> <td> " .$app->getDao()->getNameAulaById($item['IDAula']). "</td>";
                 echo "<td> " .$app->getDao()->getTramoById($item['IDTramo']). "</td>";
                 echo "<td> " .$item['Dia']. "</td>";
-                echo "<td> " .$username."";
-                echo "<td><a onclick='javascript:confirmationDelete();return false;' href='cancelarReserva.php?idUser=".$item['IDUsuario']."&idAula=".$item['IDAula']."&idTramo=".$item['IDTramo']."&Dia=".$item['Dia']."'>x</a>
-                </td>";
+                echo "<td> " .$app->getDao()->getNameUserById($item['IDUsuario']). "</td>";
+                
             }
             echo "</table>";
         }

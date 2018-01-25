@@ -67,16 +67,13 @@ class Dao{
         }
     }
 
-    function getReservasByUsuario($username)
+    function getReservas()
     {
         try{
-           $id=$this->getIdUsuarioByUsername($username);
-            $id=9;
-            $sql="Select * from ".TABLE_RESERVAS." where ".COLUMN_RESERVAS_IDUSUARIO." = :id";
+           
+            $sql="Select * from ".TABLE_RESERVAS;
 
             $statement=$this->conn->prepare($sql);
-
-            $statement->bindParam(':id',$id, PDO::PARAM_INT);
 
             $statement->execute();
 
@@ -87,12 +84,30 @@ class Dao{
         }
     }
 
+    function getReservasByUsuario($username)
+    {
+        try{
+            $id=$this->getIdUsuarioByUsername($username);
+            $sql="Select * from ".TABLE_RESERVAS." where ".COLUMN_RESERVAS_IDUSUARIO." = :id";
+            $statement=$this->conn->prepare($sql);
+            $statement->bindParam(':id',$id, PDO::PARAM_INT);
+            $statement->execute();
+
+            return $statement;
+        }catch(PDOException $e)
+        {
+            $this->error="Error al consultar la tabla ".TABLE_SECTORES;
+        }
+    }
+
+
     function getIdUsuarioByUsername($username)
     {
         try{
-            $sql="SELECT ".COLUMN_USER_ID." FROM ".TABLE_AULAS." WHERE ".COLUMN_USER_USERNAME."='".$username."'";
-            $id=$this->conn->query($sql);
-            return $id['ID'];
+            $sql="SELECT ".COLUMN_USER_ID." FROM ".TABLE_USER." WHERE ".COLUMN_USER_USERNAME."='".$username."'";
+            $statement=$this->conn->query($sql);
+            $name=$statement->fetch();
+            return $name['ID'];
             
         }catch(PDOException $e){
             echo "Error en la conexion: ".$e->getMessage();
